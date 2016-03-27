@@ -1,0 +1,49 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\usepackage{helvet}
+
+\usepackage{scrextend}
+\changefontsizes{60pt}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{tikzpicture}[font=\sffamily]
+
+\newlength{\radius}
+\setlength{\radius}{9.25cm}
+
+\draw[color=gray,line width=1pt] (0,0) circle [radius=\radius];
+
+\foreach \angle [count=\x] in {84,78,72,...,-270} {
+    \pgfmathparse{int(mod(\x,5))}
+    \let\r\pgfmathresult
+    \ifnum\r=0
+        \draw[round cap-,line width=2.5mm] (\angle:0.92\radius) -- (\angle:\radius);
+        \pgfmathsetmacro{\num}{int(\x/5)}
+        \node[inner sep=0,anchor=\angle] at (\angle:0.89\radius) {\textbf{\num}};
+    \else
+        \draw[line width=0.5mm] (\angle:0.95\radius) circle [radius=1mm];
+    \fi
+}
+
+%\foreach \angle in {0,90,180,270} {
+%  \draw[line width=3mm] (\angle:0.9\radius) -- (\angle:\radius);
+%}
+
+%\draw[line width=3mm]   (0,0) -- (120:6cm);
+%\draw[line width=2.5mm] (0,0) -- (90:7.5cm);
+%\draw[line width=2mm,color=red]   (0,0) -- (-37:8cm);
+%\filldraw[color=red] (0,0) circle [radius=5mm];
+
+\draw[color=gray] (0,0) circle [radius=3mm];
+
+\end{tikzpicture}
+
+\end{document}
